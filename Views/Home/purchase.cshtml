@@ -1,0 +1,164 @@
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ShoeTrackr.dtos.purchasedto
+ 
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <link href="./css/style.css" rel="stylesheet" />
+</head>
+<body class="">
+    <div class="showcase bckground">
+
+        <div class="bckground">
+
+            <div class="desc-container"></div>
+            <main>
+
+                <div class="signform-btn">
+                    <a class="signform-submit-btn-green-table" id="shoe-link" href=@Url.Action("GetItems","Home")>ITEMS</a>
+                    <a class="signform-submit-btn-green-table" id="purchase-link" href=@Url.Action("GetPurchase","Home")>PURCHASES</a>
+                    <a class="signform-submit-btn-green-table" id="sale-link" href=@Url.Action("GetSales","Home")>SALES</a>
+
+
+
+
+
+
+                    <div id="purchase">
+
+                        <h3 class="heading">Purchases</h3>
+
+
+                        <div class="table">
+                            <div class="table-header">
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Id</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Supplier Name</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">item Id</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Purchase Date</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Quantity </a>
+                                </div>
+                                <div class="header__item">
+                                </div>
+                            </div>
+
+                            <div class="table-content" id="table-content-purchase">
+
+                                @foreach (var item in Model.purchasesList)
+                                {
+                                    <div class="table-row">
+                                        <div class="table-data">@item.Id</div>
+                                        <div class="table-data">@item.Supplier</div>
+                                        <div class="table-data">@item.item_id</div>
+                                        <div class="table-data">@item.purchaseDate</div>
+                                        <div class="table-data">@item.quantity</div>
+                                        <div class="table-data"><button class="delete-btn" data-id="@item.Id" id="product-delete-btn">Delete</button></div>
+                                    </div>
+
+                                }
+
+
+
+                            </div>
+                        </div>
+                        <h2>Create purchase</h2>
+                         @using (Html.BeginForm("CreatePurchase", "Home", FormMethod.Post))
+                            {
+                            @Html.TextBoxFor(x=>x.purchase.purchaseDate , new { @class = "input", @placeholder="Date",@id="purchaseName" , @required = "required"})
+
+
+                            @Html.TextBoxFor(x=>x.purchase.Supplier , new { @class = "input", @placeholder="Supplier Name",@id="supplierName" , @required = "required"})
+
+                            @Html.TextBoxFor(x=>x.purchase.item_id , new { @class = "input", @placeholder="itemId",@id="itemId" , @required = "required"})
+
+                            @Html.TextBoxFor(x=>x.purchase.quantity , new { @class = "input",  @placeholder="quantity",@id="quantity", @required = "required" })
+
+
+                        
+
+                            <button id="createpurchaser" class="create-btn" type="submit">Create</button>
+                            }
+                        </div>
+                        
+                        <!-- Update purchase -->
+                        <h2>Update purchase</h2>
+
+                    @using (Html.BeginForm("UpdatePurchase", "Home", FormMethod.Post))
+                    {
+                        @Html.TextBoxFor(x=>x.purchase.Id , new { @class = "input", @placeholder="Purchase Id",@id="purchaseName" , @required = "required"})
+
+
+                        @Html.TextBoxFor(x=>x.purchase.Supplier , new { @class = "input", @placeholder="Supplier Name",@id="supplierName" , @required = "required"})
+
+                        @Html.TextBoxFor(x=>x.purchase.purchaseDate , new { @class = "input", @placeholder="Purchase Date",@id="itemId", @required = "required" })
+
+                        @Html.TextBoxFor(x=>x.purchase.quantity , new { @class = "input",  @placeholder="quantity",@id="quantity", @required = "required" })
+
+
+                        <button id="createpurchaser" class="create-btn" type="submit">Update</button>
+                    }
+                        
+                    </div>
+
+        </main>
+
+        </div>
+
+    </div>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        var ele = '@ViewBag.msg';
+       
+
+        function customFunction() {
+            debugger;
+            window.alert(ele);
+
+            // Your custom function logic
+
+
+        }
+        if (ele.length > 0) {
+            customFunction();
+        }
+
+        //var dataIdValue = 
+        // Attach a click event handler to the button with the id "myButton"
+        $(".delete-btn").click(function () {
+            debugger;
+            // Get the value of the id you want to send (you can adjust this based on your needs)
+                var id = $(this).attr('data-id'); // Replace with your actual id value
+
+            // Make the AJAX call
+            $.ajax({
+                url: '/Home/DeletePurchase',  // Replace with your controller and action names
+                method: 'POST',  // You can use 'GET' or 'POST' depending on your action method
+                data: { id: id },  // Send the id as a parameter
+                success: function (result) {
+                    // Handle the success response here, e.g., update the UI
+                    window.alert('deleted successfully');
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    // Handle any errors here
+                    window.alert('error processing request, try again')
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,173 @@
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model ShoeTrackr.dtos.Salesdto
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <link href="./css/style.css" rel="stylesheet" />
+</head>
+<body class="">
+    <div class="showcase bckground">
+
+        <div class="bckground">
+
+            <div class="desc-container"></div>
+            <main>
+
+                <div class="signform-btn">
+                    <a class="signform-submit-btn-green-table" id="shoe-link" href=@Url.Action("GetItems","Home")>ITEMS</a>
+                    <a class="signform-submit-btn-green-table" id="purchase-link" href=@Url.Action("GetPurchase","Home")>PURCHASES</a>
+                    <a class="signform-submit-btn-green-table" id="sale-link" href=@Url.Action("GetSales","Home")>SALES</a>
+
+
+                    <div id="sale" class="sale">
+                        <h3 class="heading">Sales</h3>
+
+
+                        <div class="table">
+                            <div class="table-header">
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Id</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Name</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Net Quantity</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Net Price</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Date</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Details</a>
+                                </div>
+                            </div>
+
+                            <div class="table-content" id="table-content-sale">
+
+                                @foreach (var item in Model.saleslist)
+                                {
+                                    <div class="table-row">
+                                        <div class="table-data">@item.Id</div>
+                                        <div class="table-data">@item.salesName</div>
+                                        <div class="table-data">@item.quantity</div>
+                                        <div class="table-data">@item.price</div>
+                                        <div class="table-data">@item.date</div>
+                                        <div class="table-data"><a href="@Url.ActionLink("GetSalesDetailsById","Home", new {@id = item.Id})">click here</a></div>
+                                      
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+
+                        <h2>Create Sale</h2>
+
+                        @using (Html.BeginForm("CreateSale", "Home", FormMethod.Post))
+                        {
+                            @Html.TextBoxFor(x=>x.SalesModel.salesName , new { @class = "input", @placeholder="Sales Name",@id="purchaseName", @required = "required" })
+
+                            @Html.TextBoxFor(x=>x.SalesModel.date, new { @class = "input", @placeholder="Date",@id="purchaseName", @required = "required" })
+
+
+                            @Html.TextBoxFor(x=>x.SalesModel.itemsIdList , new { @class = "input", @placeholder="Item Id's ",@id="supplierName", @required = "required" })
+
+                            @Html.TextBoxFor(x=>x.SalesModel.quantityList , new { @class = "input", @placeholder="quantities ",@id="itemId" , @required = "required"})
+
+                            <button id="createpurchaser" class="create-btn" type="submit">Create</button>
+                        }
+
+                        <!-- Update Sale -->
+                        <h2>Update Sale</h2>
+
+                        @using (Html.BeginForm("UpdateSaleItem", "Home", FormMethod.Post))
+                        {
+                            @Html.TextBoxFor(x=>x.SalesModel.quantity , new { @class = "input", @placeholder="price",@id="itemid", @required = "required" })
+
+
+                            @Html.TextBoxFor(x=>x.SalesModel.quantityList , new { @class = "input", @placeholder="quantity",@id="quantity", @required = "required" })
+
+                            
+                            @Html.TextBoxFor(x=>x.SalesModel.saleId , new { @class = "input", @placeholder="sale_id ",@id="price" , @required = "required"})
+
+                            @Html.TextBoxFor(x=>x.SalesModel.itemsIdList , new { @class = "input", @placeholder="item_id ",@id="price" , @required = "required"})
+
+                            <button id="updatesale" class="create-btn" type="submit">Update</button>
+                        }
+
+                        
+                       
+                    </div>
+            </main>
+
+        </div>
+
+    </div>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    
+        // Prevent the default form submission
+
+
+    
+       
+        $(document).ready(function(){
+        var ele = '@ViewBag.msg';
+        
+        function customFunction() {
+            debugger;
+            window.alert(ele);
+           
+            // Your custom function logic
+
+           
+        }
+        if(ele.length>0)
+        {
+        customFunction();
+        }
+        $(".delete-btn").click(function () {
+            debugger;
+            // Get the value of the id you want to send (you can adjust this based on your needs)
+            var id = $(this).attr('data-id'); // Replace with your actual id value
+
+            // Make the AJAX call
+            $.ajax({
+                url: '/Home/DeleteSales',  // Replace with your controller and action names
+                method: 'POST',  // You can use 'GET' or 'POST' depending on your action method
+                data: { id: id },  // Send the id as a parameter
+                success: function (result) {
+                    // Handle the success response here, e.g., update the UI
+                    window.alert('deleted successfully');
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    // Handle any errors here
+                    window.alert('error processing request, try again')
+                }
+            });
+        });
+    })
+        // You can define functions and execute them here
+       
+
+         // Call the custom function
+    
+        //console.log(alertmessage)
+        //if (alertMessage) {
+        //    window.alert(alertMessage);
+        //}
+        //});
+
+</script>
+

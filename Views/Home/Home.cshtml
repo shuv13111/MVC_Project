@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="./css/style.css" rel="stylesheet" />
+</head>
+<body class="main">
+    
+    <main class="main">
+        <section class="hero">
+            <p>
+                ShoeTrackr is your ultimate solution for seamless shoe management.
+                Organize, track, and showcase your shoe collection with ease. Our
+                user-friendly platform allows you to catalog, categorize, and keep an
+                inventory of your favorite footwear. Say goodbye to shoebox chaos and
+                hello to an organized digital closet for your shoes. Discover the
+                perfect balance of fashion and function with ShoeTrackr!
+            </p>
+            <a href='@Url.Action("Dashboard","Home")' class="button" id="browse-btn"><b>Get Started</b></a>
+        </section>
+        <section class="features">
+            <div class="containero">
+                <div class="tile">
+                    <h2>Manage Inventory</h2>
+                    <p>Manage and organize your inventory efficiently.</p>
+                </div>
+                <div class="tile">
+                    <h2>Log Purchases Information</h2>
+                    <p>Record and track information about your purchases.</p>
+                </div>
+                <div class="tile">
+                    <h2>Log Sales Information</h2>
+                    <p>Keep a record of your sales transactions and data.</p>
+                </div>
+                <div class="tile">
+                    <h2>Check Shoe Stock</h2>
+                    <p>Quickly check the stock status of your shoe inventory.</p>
+                </div>
+                <div class="tile">
+                    <h2>Analyze Sales</h2>
+                    <p>Analyze and gain insights from your sales data.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2023 ShoeTrackr</p>
+    </footer>
+</body>
+</html>
+
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#browse-btn").click(function () {
+            window.location.href = "Table.html";
+        });
+    });
+</script>

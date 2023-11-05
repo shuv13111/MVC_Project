@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    
+    <link href="./css/style.css" rel="stylesheet" />
+</head>
+@model IEnumerable<ShoeTrackr.Models.ItemModel>
+
+<body class="">
+    <div class="showcase bckground">
+
+        <div class="bckground">
+
+            <div class="desc-container"></div>
+            <main>
+
+                <div class="signform-btn">
+                    <a class="signform-submit-btn-green-table" id="shoe-link" href=@Url.Action("GetItems","Home")>ITEMS</a>
+                    <a class="signform-submit-btn-green-table" id="purchase-link" href=@Url.Action("GetPurchase","Home")>PURCHASES</a>
+                    <a class="signform-submit-btn-green-table" id="sale-link" href=@Url.Action("GetSales","Home")>SALES</a>
+
+
+                    <div id="sale" class="sale">
+                        <h3 class="heading">Sales Details</h3>
+
+                        <div class="table">
+                            <div class="table-header">
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">item Name</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">quantity</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">price</a>
+                                </div>
+
+                            </div>
+
+                            <div class="table-content" id="table-content-sale">
+                                @foreach (var item in Model)
+                                {
+                                    <div class="table-row">
+                                        <div class="table-data">@item.Name</div>
+                                        <div class="table-data">@item.quantity</div>
+                                        <div class="table-data">@item.price</div>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                     
+
+
+                     
+
+                     
+
+
+                    </div>
+                    </div>
+            </main>
+
+        </div>
+
+    </div>
+</body>
+</html>
+
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+    $(document).ready(function () { });
+</script>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}

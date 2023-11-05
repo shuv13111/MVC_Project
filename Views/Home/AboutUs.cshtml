@@ -1,0 +1,237 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en">
+  <head>
+    <link href="./css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div>
+      <!-- Main content that should be edited -->
+      <section>
+            <article>
+                <img src= '~/Images/SHUV.jpeg' width="100px" />
+                <h2>Shuvrangshu Mukhopadhyay</h2>
+          <p>
+            I am a dedicated and accomplished analytics professional 
+			  with a strong background in the IT industry, I bring a 
+		          unique combination of skills in data analysis and consumer 
+			  behavior modeling to the table. Over the years, my ability 
+                          to leverage statistical analysis for making informed decisions 
+                          and extracting valuable insights from complex datasets has 
+                          consistently contributed to the success of my past endeavors.
+                          I have worked on Sale Details and Supplier Form using HTML and css. 
+			  Also, I worked on the ER diagram for the tables.
+          </p>
+        </article>
+
+        <article>
+          <img src="~/images/Rahul_bankey.jpeg" width="100px" />
+          <h2>Rahul Bankey</h2>
+          <p>
+            Data Engineer with 3.5+ years of experience in 
+                           building and maintaining data pipelines. Proven 
+                           ability to prioritize requests from multiple
+                           stakeholders and effectively communicate complex 
+                           projects to non-technical audiences. Strong experience 
+			   in SQL, Python, Google BigQuery. I used HTML to create 
+			   About Us page, I used CSS to style the page and create 
+                           a responsive design. Also, added interactive features to 
+                           the page using JavaScript. 
+          </p>
+        </article>
+
+        <article>
+          <img
+            src="~/images/SimranAgch - Copy.jpg"
+            width="50px"
+          />
+          <h2>Simran Agichani </h2>
+          <p>
+            An adaptable data enthusiast with 3+years of hands-on 
+			  ETL analytics experience in banking and finance domain (BFS), 
+			  which includes design, implementation, support and management 
+			  of a full life cycle. Adept in Tableau, PowerBI and Qlik for 
+		          helping businesses make better data-driven decisions leading 
+			  to customer satisfaction. I have worked on home page styling 
+			  and charts for our data. I Made a layout that is both aesthetically 
+			  appealing and simple to navigate using HTML and CSS.
+          </p>
+        </article>
+
+        <article>
+          <img
+            src="~/images/Himanshu.jpeg"
+            width="100px"
+          />
+          <h2>Himanshu Sharma</h2>
+          <p>
+            An analytical and process-oriented Analyst with 4+ years 
+			    of professional experience in the domain of Analytics in 
+			    Supply Chain. I'm skilled in data manipulation, data analysis, 
+			    and visualization, with in-depth knowledge of SQL, Python, R.
+ I have worked on dashboard creation and styling.I
+            created a dashboard page layout using HTML that
+            features a variety of widgets and panels to show
+            data about the shoe items, sales and purchases.
+          </p>
+        </article>
+      </section>
+     
+      <div style="width: 40%;">
+        <div class="d3js12">
+          <div class="margin-about">
+            <h3>Shoe Ratings percentage in Inventory</h3>
+         
+
+          <script src="https://d3js.org/d3.v6.min.js"></script>
+
+          <svg id="chart" width="500" height="350"></svg>
+
+          <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+        </div>
+        <style>
+          h3 {
+            font-size: 1.5em;
+            text-align: center;
+          }
+          .d3js12 {
+            text-align: center;
+          }
+          svg text {
+            font-size: 16px;
+          }
+        </style>
+      </div>
+      <div class="textee">
+      <div class="margin-about">
+        <h3>Entity Relation Diagram</h3>
+        <div class="article-img">
+          <img src="~/images/ER-1.jpg" width="auto" height="300px"></img>
+        </div>
+
+      </div>
+      <div class="margin-about">
+      <h3>API ENDPOINTS</h3>
+      <div class="table-about">
+      <div class="table-content" id="table-content-purchase">
+
+        <ul>
+          <li><b>End Point:</b>  https://shoes-collections.p.rapidapi.com/shoes/3</li>
+
+          <li><b>HOST:</b>  shoes-collections.p.rapidapi.com</li>
+        </ul>
+      
+       
+        <div class="table-row">
+          <div class="table-data"><b></b></div>
+          <div class="table-data-about"></div>
+          
+        </div>
+        <div class="table-row">
+          <div class="table-data"><b></b></div>
+          <div class="table-data-about"></div>
+        </div>
+      </div>
+      </div>
+      <div>
+        <div class="margin-about">
+        <h3>GITHUB LINK</h3>
+        <ul>
+          <li>
+        <label>
+          https://github.com/SimranAgichani/Assignment_LookAndFeel
+        </label>
+        </li>
+        <ul>
+        </div>
+      </div>
+      </div>
+
+    </div>
+  </body>
+</html>
+
+<script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-1.7.1.min.js"
+></script>
+<script>
+
+$(document).ready(function () {
+    var resultdata = {};
+
+        $.ajax({
+            url: '/Home/GetData', // Replace with your actual controller and action URL
+            type: 'GET', // Use 'POST' if your action requires a POST request
+            success: function (result) {
+                debugger;
+                // Handle the response from the server
+                resultdata=result; 
+                // Log the data received from the server
+                console.log(resultdata);
+
+                const data = [
+                    { rating: "0-1", percentage: resultdata.cnt1 },
+                    { rating: "1-2", percentage: resultdata.cnt2 },
+                    { rating: "2-3", percentage: resultdata.cnt3 },
+                    { rating: "3-4", percentage: resultdata.cnt4 },
+                    { rating: "4-5", percentage: resultdata.cnt5 }
+                ];
+
+                const chart = d3.select("#chart");
+
+                const margin = { top: 20, right: 50, bottom: 100, left: 50 }; // Adjusted right and left margins
+                const width = 500 - margin.left - margin.right;
+                const height = 400 - margin.top - margin.bottom;
+
+                const xScale = d3
+                    .scaleBand()
+                    .domain(data.map((d) => d.rating))
+                    .range([0, width])
+                    .padding(0.1);
+
+                const yScale = d3.scaleLinear().domain([0, 100]).range([height, 0]); // Reversed the range for yScale
+
+                // Create the x and y axes
+                const xAxis = d3.axisBottom(xScale); // Changed to xScale
+                const yAxis = d3.axisLeft(yScale);
+
+                // Create a new group for the chart
+                const g = chart
+                    .append("g")
+                    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+                // Create the bars
+                g.selectAll(".bar")
+                    .data(data)
+                    .enter()
+                    .append("rect")
+                    .attr("class", "bar")
+                    .attr("x", (d) => xScale(d.rating)) // Use xScale for x position
+                    .attr("y", (d) => yScale(d.percentage)) // Use yScale for y position
+                    .attr("width", xScale.bandwidth())
+                    .attr("height", (d) => height - yScale(d.percentage)); // Adjusted the height calculation
+
+                // Add the x and y axes
+                g.append("g")
+                    .attr("class", "axis")
+                    .attr("transform", `translate(0, ${height})`)
+                    .call(xAxis);
+                g.append("g").attr("class", "axis").call(yAxis);
+            },
+            error: function (error) {
+                // Handle any errors
+                console.error(error);
+            }
+        });
+});
+
+</script>
+
+

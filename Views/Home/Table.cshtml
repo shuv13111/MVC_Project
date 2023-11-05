@@ -1,0 +1,70 @@
+﻿@model ShoeTrackr.dtos.itemdto
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <link href="./css/style.css" rel="stylesheet" />
+</head>
+<body class="">
+    <div class="showcase bckground">
+
+        <div class="bckground">
+
+            <div class="desc-container"></div>
+            <main>
+
+                <div class="signform-btn-width">
+                    <a class="signform-submit-btn-green-table" id="shoe-link" href=@Url.Action("GetItems","Home")>ITEMS</a>
+                    <a class="signform-submit-btn-green-table" id="purchase-link" href=@Url.Action("GetPurchase","Home")>PURCHASES</a>
+                    <a class="signform-submit-btn-green-table" id="sale-link" href=@Url.Action("GetSales","Home")>SALES</a>
+
+
+
+                    <div id="shoe" class="items-table-width">
+                        <h3 class="heading">ITEMS</h3>
+                        <div class="table">
+                            <div class="table-header">
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">ID</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Name</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Description</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Price</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Quantity in Stock</a>
+                                </div>
+                                <div class="header__item">
+                                    <a id="name" class="filter__link">Rating</a>
+                                </div>
+                               
+                            </div>
+
+                            <div class="table-content" id="table-content-shoe">
+                                @foreach (var itm in Model.ItemsList)
+                                {
+                                    <div class="table-row">
+                                        <div class="table-data"><b>@Html.DisplayFor(x=>itm.Id)</b></div>
+                                        <div class="table-data"><b>@Html.DisplayFor(x=>itm.Name)</b></div>
+                                        <div class="table-data"><b>@Html.DisplayFor(x=>itm.Description)</b></div>
+                                        <div class="table-data"><b>@Html.DisplayFor(x=>itm.price)</b></div>
+                                        <div class="table-data">@Html.DisplayFor(x=>itm.quantity)</div>
+                                        <div class="table-data">@Html.DisplayFor(x=>itm.rating)</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                    </div>
+            </main>
+
+        </div>
+
+    </div>
+</body>
+</html>
